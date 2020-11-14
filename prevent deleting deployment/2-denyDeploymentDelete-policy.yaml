@@ -1,0 +1,11 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sDenyDeploymentDelete
+metadata:
+  name: deny-deployment-delete
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Deployment"]
+  parameters:
+    deployment: ["busybox"]

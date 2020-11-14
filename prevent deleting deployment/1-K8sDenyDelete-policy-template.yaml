@@ -1,0 +1,24 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: k8sdenydeploymentdelete
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sDenyDeploymentDelete
+        openAPIV3Schema:
+          properties:
+            deployment:
+              type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8sdenydeploymentdelete
+
+        violation[msg] {
+          input.request.kind.kind == "Deployment"
+          input.request.operation == "DELETE"
+          deployment := input.request.name
+          msg := sprintf("Forbidden action: %v", [deployment])
+        }
