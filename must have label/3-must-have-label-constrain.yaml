@@ -1,0 +1,13 @@
+## Deploying a Constrain that consumes the template "K8sRequiredLabels"
+## This constrain assumes that any new namespace should have a "gatekeeper" label attached to it in order not to violate
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequiredLabels
+metadata:
+  name: ns-must-have-lable
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Namespace"]
+  parameters:
+    labels: ["gatekeeper"]
