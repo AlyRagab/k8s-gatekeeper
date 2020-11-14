@@ -1,0 +1,11 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequiredRegistry
+metadata:
+  name: images-must-come-from-aws-ecr
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+  parameters:
+    registry: "aws-ecr/" ## Replace it with the ECR Repo
