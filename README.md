@@ -10,4 +10,14 @@ Applying examples of Open Policy Agent - Gatekeeper into Kubernetes
 - We create a Policy template by a `Rego` Language.
 - Then we create a Constraint which will consume the previously created Policy template.
 
-#### Included in this repo examples of running OPA in Kubernetes.
+### OPA vs Gatekeeper ?
+- OPA is a general Policy Agent which can be applied in many things.
+- Gatekeeper is just specific for Kubernetes , and it actually uses OPA internally.
+- Both OPA and Gatekeeper are using the `Rego` Policy Language.
+
+### Setup of Gatekeeper :
+```
+kubectl apply -f gatekeeper-crd.yaml
+```
+
+#### Included in this repo policies examples of running OPA in Kubernetes.
