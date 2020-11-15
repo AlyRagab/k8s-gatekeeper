@@ -1,0 +1,22 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: k8sdenyconfigmapdelete
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sDenyConfigMapDelete
+        openAPIV3Schema:
+          properties:
+            ingress:
+              type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8sdenyconfigmapdelete
+         violation[{"msg": msg}]{
+          configmap := input.parameters.configmap
+          input.review.operation == "DELETE"
+          msg := sprintf("Deleting the configmap %v is forbidden", [configmap])
+        }

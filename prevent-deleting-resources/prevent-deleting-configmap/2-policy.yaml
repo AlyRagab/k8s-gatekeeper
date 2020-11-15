@@ -1,0 +1,11 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sDenyConfigMapDelete
+metadata:
+  name: k8sdenyconfigmapdelete
+spec:
+  match:
+    kinds:
+      - apiGroups: ["*"]
+        kinds: ["ConfigMap"]
+  parameters:
+    configmap: "conf"
