@@ -1,11 +1,11 @@
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sDenyIngressDelete
 metadata:
-  name: K8sDenyIngressDelete
+  name: k8sdenyingressdelete
 spec:
   match:
     kinds:
-      - apiGroups: ["ingress"]
+      - apiGroups: ["*"]
         kinds: ["Ingress"]
   parameters:
     ingress: "test"

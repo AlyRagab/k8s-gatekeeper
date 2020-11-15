@@ -1,7 +1,7 @@
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sDenyDeploymentDelete
 metadata:
-  name: K8sDenyDeploymentDelete
+  name: k8sdenydeploymentdelete
 spec:
   match:
     kinds:
