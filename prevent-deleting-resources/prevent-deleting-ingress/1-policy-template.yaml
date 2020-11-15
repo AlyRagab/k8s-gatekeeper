@@ -15,8 +15,7 @@ spec:
     - target: admission.k8s.gatekeeper.sh
       rego: |
         package k8sdenyingressdelete
-
-        violation[{"msg": msg}]{
+         violation[{"msg": msg}]{
           ingress := input.parameters.ingress
           input.review.operation == "DELETE"
           msg := sprintf("Deleting the ingress %v is forbidden", [ingress])
