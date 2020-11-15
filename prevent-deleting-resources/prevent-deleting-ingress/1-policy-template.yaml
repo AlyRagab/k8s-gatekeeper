@@ -1,0 +1,23 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: k8sdenyingressdelete
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sDenyIngressDelete
+        openAPIV3Schema:
+          properties:
+            ingress:
+              type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8sdenyingressdelete
+
+        violation[{"msg": msg}]{
+          ingress := input.parameters.ingress
+          input.review.operation == "DELETE"
+          msg := sprintf("Deleting the ingress %v is forbidden", [ingress])
+        }

@@ -15,10 +15,8 @@ spec:
     - target: admission.k8s.gatekeeper.sh
       rego: |
         package k8sdenydeploymentdelete
-
-        violation[msg] {
-          input.request.kind.kind == "Deployment"
-          input.request.operation == "DELETE"
-          deployment := input.request.name
-          msg := sprintf("Forbidden action: %v", [deployment])
+         violation[{"msg": msg}]{
+          deployment := input.parameters.deployment
+          input.review.operation == "DELETE"
+          msg := sprintf("Deleting the deployment %v is forbidden", [deployment])
         }
